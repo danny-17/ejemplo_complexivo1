@@ -1,6 +1,7 @@
 package com.example.ejemplo_complexivo1.controller;
 
 import com.example.ejemplo_complexivo1.model.Usuario;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -15,9 +16,18 @@ import java.util.List;
 @Controller
 @RequestMapping("/api")
 public class IndexController {
+
+    @Value("${texto.indexcontroller.index.titulo}")
+    private String textoIndex;
+    @Value("${texto.indexcontroller.perfil.titulo}")
+    private String textoPerfil;
+    @Value("${texto.indexcontroller.listar.titulo}")
+    private String textoLista;
+
     @GetMapping({ "/index", "/", "/home"})
     public String index(ModelMap model){
-        model.addAttribute("titulo", "hola a todos");
+        // model.addAttribute("titulo", "hola a todos");
+        model.addAttribute("titulo", textoIndex);
         return "index";
     }
 
@@ -29,16 +39,19 @@ public class IndexController {
         usuario.setApellido("Tenemea");
         usuario.setEmail("dannyjavitenemea@gmail.com");
         model.addAttribute("usuario", usuario);
-        model.addAttribute("titulo", "HOLA A TODOS");
+        // model.addAttribute("titulo", "HOLA A TODOS");
+        model.addAttribute("titulo", textoPerfil.concat(usuario.getNombre()));
         return "perfil";
     }
 
 
     @RequestMapping("/listar")
-    public String listar(Model model){
-        model.addAttribute("titulo", "listado de usuarios");
+    public String listar (Model model){
+        List<Usuario> usuarios =new ArrayList<>();
 
-
+        // model.addAttribute("titulo","Listado de usuarios");
+        model.addAttribute("titulo",textoLista);
+        // model.addAttribute("usuarios",usuarios);
         return "listar";
     }
 

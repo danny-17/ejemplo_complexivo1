@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title th:text="${titulo}"></title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"><link>
 </head>
 <body>
-<h1 th:text="${titulo}"></h1>
+<h1 class="color-rojo" th:text="${titulo}"></h1>
+<h2 class="color-azul">Aplicando estilos css en recursos estaticos </h2>
+<img th:src="@{/imagenes/logoista.png}">
 <table th:if="${usuarios.size()>0}" border="1" align="center"  cellspacing="0">
     <thead>
     <th bgcolor="yellow">Nombre</th>
